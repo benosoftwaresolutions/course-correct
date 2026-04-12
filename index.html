@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Correct — Architecture for the modern career</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E8E5DE;
+    --bg2: #DEDAD2;
+    --ink: #2E2E24;
+    --ink2: #5A5A4E;
+    --ink3: #8A8A7A;
+    --accent-coral: #D85A30;
+    --accent-teal: #1D9E75;
+    --accent-purple: #534AB7;
+    --accent-amber: #BA7517;
+    --phase1: #FAECE7;
+    --phase1t: #712B13;
+    --phase2: #EEEDFE;
+    --phase2t: #3C3489;
+    --phase3: #E1F5EE;
+    --phase3t: #085041;
+    --phase4: #FAEEDA;
+    --phase4t: #633806;
+    --phase5: #EAF3DE;
+    --phase5t: #27500A;
+    --phase6: #F1EFE8;
+    --phase6t: #444441;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(46,46,36,0.1);
+  }
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500; font-size: 15px;
+    color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 300; color: var(--ink2);
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--bg) !important;
+    padding: 8px 20px; border-radius: 2px;
+    font-weight: 400 !important;
+  }
+  .nav-cta:hover { background: var(--ink2) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative;
+  }
+  .hero-label {
+    font-size: 13px; font-weight: 400; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink3);
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(72px, 10vw, 140px);
+    font-weight: 400; line-height: 0.95;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--ink2);
+  }
+  .hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 300; color: var(--ink2);
+    max-width: 480px; line-height: 1.5;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--ink); color: var(--bg);
+    padding: 14px 28px; border-radius: 2px;
+    font-size: 14px; font-weight: 400; letter-spacing: 0.02em;
+    text-decoration: none; transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .btn-primary:hover { background: var(--ink2); }
+  .btn-secondary {
+    background: transparent; color: var(--ink);
+    padding: 14px 28px; border-radius: 2px;
+    border: 1px solid rgba(46,46,36,0.3);
+    font-size: 14px; font-weight: 400; letter-spacing: 0.02em;
+    text-decoration: none; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px; background: rgba(46,46,36,0.12);
+    margin: 0 48px;
+  }
+
+  /* PROBLEM */
+  .problem {
+    padding: 100px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .section-label {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink3);
+    margin-bottom: 20px;
+  }
+  .problem-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+  }
+  .problem-points { padding-top: 8px; }
+  .problem-point {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(46,46,36,0.1);
+  }
+  .problem-point:first-child { border-top: 1px solid rgba(46,46,36,0.1); }
+  .problem-point p {
+    font-size: 17px; font-weight: 300;
+    color: var(--ink2); line-height: 1.6;
+  }
+  .problem-point strong { color: var(--ink); font-weight: 500; }
+
+  /* GAP */
+  .gap-section {
+    padding: 100px 48px;
+    background: var(--bg2);
+    text-align: center;
+  }
+  .gap-quote {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400; font-style: italic;
+    color: var(--ink); line-height: 1.2;
+    max-width: 860px; margin: 0 auto 48px;
+  }
+  .gap-matrix {
+    display: grid; grid-template-columns: 1fr 1fr;
+    max-width: 600px; margin: 0 auto;
+    gap: 6px;
+  }
+  .gap-cell {
+    padding: 28px 24px; border-radius: 4px;
+    text-align: left; cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .gap-cell:hover { transform: scale(1.02); }
+  .gap-cell-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .gap-cell-sub { font-size: 13px; font-weight: 300; line-height: 1.4; }
+  .gap-axis-x {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink3); margin-top: 8px; text-align: center;
+  }
+  .gap-axis-y-wrap {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .gap-axis-y {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink3); white-space: nowrap;
+  }
+  .gap-low-high {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--ink3); max-width: 600px;
+    margin: 0 auto 4px; padding: 0 2px;
+  }
+
+  /* SOLUTION */
+  .solution {
+    padding: 100px 48px;
+  }
+  .solution-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 60px; gap: 40px; flex-wrap: wrap;
+  }
+  .solution-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+  }
+  .solution-desc {
+    font-size: 17px; font-weight: 300;
+    color: var(--ink2); max-width: 380px; line-height: 1.6;
+  }
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .phase-card {
+    padding: 32px 28px; border-radius: 4px;
+    cursor: pointer; transition: transform 0.15s;
+    position: relative;
+  }
+  .phase-card:hover { transform: translateY(-2px); }
+  .phase-num {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.6; margin-bottom: 12px;
+  }
+  .phase-name {
+    font-size: 18px; font-weight: 500; line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .phase-outcome {
+    font-size: 13px; font-weight: 300; line-height: 1.5; opacity: 0.8;
+  }
+
+  /* DELIVERY */
+  .delivery {
+    padding: 100px 48px;
+    background: var(--bg2);
+  }
+  .delivery-header { margin-bottom: 60px; }
+  .delivery-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .delivery-sub {
+    font-size: 17px; font-weight: 300; color: var(--ink2);
+  }
+  .lanes-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  }
+  .lane-card {
+    background: var(--bg); padding: 28px 24px; border-radius: 4px;
+  }
+  .lane-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    margin-bottom: 16px;
+  }
+  .lane-name {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink3); margin-bottom: 8px;
+  }
+  .lane-format {
+    font-size: 20px; font-weight: 500; color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .lane-desc {
+    font-size: 13px; font-weight: 300; color: var(--ink2); line-height: 1.5;
+  }
+
+  /* OUTPUT */
+  .output {
+    padding: 100px 48px;
+  }
+  .output-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .output-sub {
+    font-size: 17px; font-weight: 300; color: var(--ink2);
+    margin-bottom: 60px;
+  }
+  .output-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  }
+  .output-card {
+    background: var(--bg2); padding: 32px 28px; border-radius: 4px;
+  }
+  .output-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 48px; font-weight: 400; color: rgba(46,46,36,0.15);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .output-item {
+    font-size: 17px; font-weight: 500; color: var(--ink);
+    line-height: 1.3; margin-bottom: 8px;
+  }
+  .output-item-desc {
+    font-size: 14px; font-weight: 300; color: var(--ink2); line-height: 1.5;
+  }
+
+  /* WHO */
+  .who {
+    padding: 100px 48px;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .who-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 400; line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 60px;
+  }
+  .who-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  }
+  .who-card-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(232,229,222,0.5);
+    margin-bottom: 12px;
+  }
+  .who-card-title {
+    font-size: 22px; font-weight: 500;
+    color: var(--bg); margin-bottom: 12px; line-height: 1.2;
+  }
+  .who-card-desc {
+    font-size: 15px; font-weight: 300;
+    color: rgba(232,229,222,0.7); line-height: 1.6;
+  }
+  .who-divider {
+    height: 1px; background: rgba(232,229,222,0.12); margin: 0 0 40px;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+  }
+  .cta-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 6vw, 88px);
+    font-weight: 400; line-height: 1.0;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .cta-title em { font-style: italic; color: var(--ink2); }
+  .cta-sub {
+    font-size: 18px; font-weight: 300; color: var(--ink2);
+    margin-bottom: 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid rgba(46,46,36,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p {
+    font-size: 13px; font-weight: 300; color: var(--ink3);
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 60px; }
+    .problem { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+    .gap-section { padding: 60px 24px; }
+    .gap-matrix { grid-template-columns: 1fr 1fr; max-width: 100%; }
+    .solution { padding: 60px 24px; }
+    .phases-grid { grid-template-columns: 1fr 1fr; }
+    .delivery { padding: 60px 24px; }
+    .lanes-grid { grid-template-columns: 1fr 1fr; }
+    .output { padding: 60px 24px; }
+    .output-grid { grid-template-columns: 1fr 1fr; }
+    .who { padding: 60px 24px; }
+    .who-grid { grid-template-columns: 1fr; gap: 32px; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    .divider { margin: 0 24px; }
+  }
+  @media (max-width: 600px) {
+    .phases-grid { grid-template-columns: 1fr; }
+    .output-grid { grid-template-columns: 1fr; }
+    .lanes-grid { grid-template-columns: 1fr; }
+    .gap-matrix { grid-template-columns: 1fr; max-width: 100%; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Course Correct</a>
+  <div class="nav-links">
+    <a href="#phases">The programme</a>
+    <a href="#delivery">How it works</a>
+    <a href="#who">Who it's for</a>
+    <a href="#contact" class="nav-cta">Get started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Architecture for the modern career</p>
+  <h1 class="hero-title">Course<br><em>Correct.</em></h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">A 6-phase tactical roadmap for early professionals, people in education, and anyone who wants to take control of their direction and build a better life.</p>
+    <div class="hero-actions">
+      <a href="#phases" class="btn-primary">See the programme</a>
+      <a href="#who" class="btn-secondary">Is this for me?</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="fade-up">
+    <p class="section-label">The problem</p>
+    <h2 class="problem-title">The linear career is dead.</h2>
+  </div>
+  <div class="problem-points fade-up">
+    <div class="problem-point">
+      <p>The system produces high-level specialists. The market requires <strong>value builders</strong>.</p>
+    </div>
+    <div class="problem-point">
+      <p>Most people spend 100% of their energy on effort and <strong>0% on visibility</strong> — the trust signals that make others take notice.</p>
+    </div>
+    <div class="problem-point">
+      <p>It's difficult to block out all the noise and <strong>focus on what's important</strong>.</p>
+    </div>
+    <div class="problem-point">
+      <p>Talent alone isn't enough. <strong>Where you are matters as much as what you know.</strong></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GAP -->
+<section class="gap-section" id="gap">
+  <p class="section-label">The gap</p>
+  <p class="gap-quote">"Effort doesn't always equal outcome. We bridge the gap between having talent and being known for it."</p>
+
+  <div class="gap-axis-y-wrap" style="justify-content:center;margin-bottom:4px;">
+    <span class="gap-axis-y">Visibility →</span>
+    <div style="flex:1;max-width:600px;">
+      <div class="gap-low-high"><span>Low</span><span>High</span></div>
+      <div class="gap-matrix">
+        <div class="gap-cell" style="background:#FAECE7;">
+          <div class="gap-cell-title" style="color:#712B13;">Hidden gem</div>
+          <div class="gap-cell-sub" style="color:#993C1D;">High effort, low visibility. Working hard but nobody knows it.</div>
+        </div>
+        <div class="gap-cell" style="background:#E1F5EE;border:2px solid #1D9E75;">
+          <div class="gap-cell-title" style="color:#085041;">The sweet spot ✓</div>
+          <div class="gap-cell-sub" style="color:#0F6E56;">Hard work meets trust signals. This is the target.</div>
+        </div>
+        <div class="gap-cell" style="background:#F1EFE8;">
+          <div class="gap-cell-title" style="color:#444441;">Invisible</div>
+          <div class="gap-cell-sub" style="color:#5F5E5A;">Low effort, low visibility. Disconnected from progress.</div>
+        </div>
+        <div class="gap-cell" style="background:#EEEDFE;">
+          <div class="gap-cell-title" style="color:#3C3489;">All show</div>
+          <div class="gap-cell-sub" style="color:#534AB7;">High visibility, low effort. Reputation without substance.</div>
+        </div>
+      </div>
+      <div class="gap-axis-x">← Effort →</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PHASES -->
+<section class="solution" id="phases">
+  <div class="solution-header fade-up">
+    <div>
+      <p class="section-label">The solution</p>
+      <h2 class="solution-title">6-Phase<br>System Override</h2>
+    </div>
+    <p class="solution-desc">Course Correct isn't a course. It's a tactical roadmap. We use reverse engineering to align where you are today with a 10-year life plan.</p>
+  </div>
+
+  <div class="phases-grid">
+    <div class="phase-card fade-up" style="background:var(--phase1);">
+      <div class="phase-num" style="color:var(--phase1t);">Phase 01</div>
+      <div class="phase-name" style="color:var(--phase1t);">Direction and Identity</div>
+      <div class="phase-outcome" style="color:var(--phase1t);">Clarity and confidence in direction.</div>
+    </div>
+    <div class="phase-card fade-up" style="background:var(--phase2);">
+      <div class="phase-num" style="color:var(--phase2t);">Phase 02</div>
+      <div class="phase-name" style="color:var(--phase2t);">Positioning and Leverage</div>
+      <div class="phase-outcome" style="color:var(--phase2t);">Better opportunities with less friction.</div>
+    </div>
+    <div class="phase-card fade-up" style="background:var(--phase3);">
+      <div class="phase-num" style="color:var(--phase3t);">Phase 03</div>
+      <div class="phase-name" style="color:var(--phase3t);">Network and Influence</div>
+      <div class="phase-outcome" style="color:var(--phase3t);">Stronger connections without being fake.</div>
+    </div>
+    <div class="phase-card fade-up" style="background:var(--phase4);">
+      <div class="phase-num" style="color:var(--phase4t);">Phase 04</div>
+      <div class="phase-name" style="color:var(--phase4t);">Presence, Confidence and Trust</div>
+      <div class="phase-outcome" style="color:var(--phase4t);">People take you seriously.</div>
+    </div>
+    <div class="phase-card fade-up" style="background:var(--phase5);">
+      <div class="phase-num" style="color:var(--phase5t);">Phase 05</div>
+      <div class="phase-name" style="color:var(--phase5t);">Value and Equity</div>
+      <div class="phase-outcome" style="color:var(--phase5t);">Expand your field of view beyond your horizon.</div>
+    </div>
+    <div class="phase-card fade-up" style="background:var(--phase6);">
+      <div class="phase-num" style="color:var(--phase6t);">Phase 06</div>
+      <div class="phase-name" style="color:var(--phase6t);">Breaking Out of the Box</div>
+      <div class="phase-outcome" style="color:var(--phase6t);">A complete, stress-tested plan ready to act on.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DELIVERY -->
+<section class="delivery" id="delivery">
+  <div class="delivery-header fade-up">
+    <p class="section-label">How it works</p>
+    <h2 class="delivery-title">Hybrid mentorship.</h2>
+    <p class="delivery-sub">We balance scalability with high-touch guidance across four delivery lanes.</p>
+  </div>
+  <div class="lanes-grid">
+    <div class="lane-card fade-up">
+      <div class="lane-dot" style="background:#888780;"></div>
+      <div class="lane-name">Knowledge Lane</div>
+      <div class="lane-format">Digital intel</div>
+      <div class="lane-desc">The frameworks, tools, and content to understand each phase.</div>
+    </div>
+    <div class="lane-card fade-up">
+      <div class="lane-dot" style="background:#D4537E;"></div>
+      <div class="lane-name">Social Lane</div>
+      <div class="lane-format">Group sparring</div>
+      <div class="lane-desc">Peer challenge, shared learning, and real accountability.</div>
+    </div>
+    <div class="lane-card fade-up">
+      <div class="lane-dot" style="background:#378ADD;"></div>
+      <div class="lane-name">Personal Lane</div>
+      <div class="lane-format">1:1 course correction</div>
+      <div class="lane-desc">15–30 minute deep dives that find the one move that changes everything.</div>
+    </div>
+    <div class="lane-card fade-up">
+      <div class="lane-dot" style="background:#639922;"></div>
+      <div class="lane-name">Proof Lane</div>
+      <div class="lane-format">Tangible output</div>
+      <div class="lane-desc">Real deliverables that prove progress and build a track record.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OUTPUT -->
+<section class="output" id="output">
+  <div class="fade-up">
+    <p class="section-label">What you leave with</p>
+    <h2 class="output-title">Everyone produces proof.</h2>
+    <p class="output-sub">By the end of the programme, every person leaves with four tangible outputs.</p>
+  </div>
+  <div class="output-grid">
+    <div class="output-card fade-up">
+      <div class="output-num">01</div>
+      <div class="output-item">A validated 10–5–3–1 year SMART plan</div>
+      <div class="output-item-desc">A life plan broken into achievable milestones — not just aspirations.</div>
+    </div>
+    <div class="output-card fade-up">
+      <div class="output-num">02</div>
+      <div class="output-item">A defined value proposition</div>
+      <div class="output-item-desc">A clear articulation of what you bring and why it matters to others.</div>
+    </div>
+    <div class="output-card fade-up">
+      <div class="output-num">03</div>
+      <div class="output-item">A high-value industry connection</div>
+      <div class="output-item-desc">At least one relationship that can genuinely move the needle.</div>
+    </div>
+    <div class="output-card fade-up" style="grid-column: span 3;">
+      <div class="output-num">+</div>
+      <div class="output-item">A personal track record</div>
+      <div class="output-item-desc">Proof of progress across all six phases — visible to the people who matter.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO -->
+<section class="who" id="who">
+  <h2 class="who-title fade-up">Built for anyone<br><em style="font-style:italic;color:rgba(232,229,222,0.6);">who wants more.</em></h2>
+  <div class="who-divider"></div>
+  <div class="who-grid">
+    <div class="fade-up">
+      <div class="who-card-label">01</div>
+      <div class="who-card-title">Early young professionals</div>
+      <div class="who-card-desc">Finding your footing in the working world and wanting to accelerate faster. You're putting in the effort but not seeing the return yet.</div>
+    </div>
+    <div class="fade-up">
+      <div class="who-card-label">02</div>
+      <div class="who-card-title">People in education</div>
+      <div class="who-card-desc">Investing in your development but unsure how to translate it into real-world momentum. You want your effort to count beyond the classroom.</div>
+    </div>
+    <div class="fade-up">
+      <div class="who-card-label">03</div>
+      <div class="who-card-title">Anyone wanting a better life</div>
+      <div class="who-card-desc">Regardless of background, age, or starting point — if you're ready to take an honest look at where you are and build a plan to get somewhere better.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="cta-title fade-up">Ready to<br><em>course correct?</em></h2>
+  <p class="cta-sub fade-up">Take control of your direction. Build a plan. Get known for your work.</p>
+  <div class="fade-up">
+    <a href="mailto:hello@coursecorrect.com" class="btn-primary" style="font-size:16px;padding:16px 36px;">Get in touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Course Correct</p>
+  <p>Architecture for the modern career.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
