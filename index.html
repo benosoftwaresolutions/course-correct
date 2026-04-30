@@ -65,6 +65,7 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent-coral); }
   .nav-cta {
     background: var(--ink) !important; color: var(--bg) !important;
     padding: 8px 20px; border-radius: 2px;
@@ -416,12 +417,13 @@
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Course Correct</a>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Course Correct</a>
   <div class="nav-links">
     <a href="#phases">The programme</a>
     <a href="#delivery">How it works</a>
     <a href="#who">Who it's for</a>
+    <a href="cohort.html">First cohort</a>
     <a href="#contact" class="nav-cta">Get started</a>
   </div>
 </nav>
@@ -663,6 +665,10 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.padding = window.scrollY > 60 ? '12px 48px' : '20px 48px';
+  });
 </script>
 </body>
 </html>
