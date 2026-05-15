@@ -174,30 +174,21 @@ footer p{font-size:13px;font-weight:300;color:var(--ink3);}
     const payload = {};
     data.forEach((v, k) => payload[k] = v);
 
-    // Replace the action URL below with your form endpoint (e.g. Formspree, Netlify, etc.)
-    const FORM_ENDPOINT = '';
-
-    if (!FORM_ENDPOINT) {
-      // No endpoint configured yet — show success UI so the flow is visible
-      this.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-      return;
-    }
-
-    fetch(FORM_ENDPOINT, {
+    fetch('/api/register', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
     .then(r => {
       if (r.ok) {
         this.style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
+      } else {
+        alert('Something went wrong — please try again or email us directly.');
       }
     })
     .catch(() => {
-      this.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+      alert('Something went wrong — please try again or email us directly.');
     });
   });
 </script>
