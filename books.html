@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Correct — The Books · Ravi Sibal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8E5DE;--bg2:#DEDAD2;--ink:#2E2E24;--ink2:#5A5A4E;--ink3:#8A8A7A;
+  --coral:#D85A30;--teal:#1D9E75;--purple:#534AB7;--amber:#BA7517;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-bottom:1px solid rgba(46,46,36,0.1);transition:padding 0.3s;}
+.nav-logo{font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:var(--ink);text-decoration:none;letter-spacing:0.02em;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:14px;font-weight:300;color:var(--ink2);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a.active{color:var(--coral);}
+.nav-cta{background:var(--ink)!important;color:var(--bg)!important;padding:8px 20px;border-radius:2px;font-weight:400!important;}
+.nav-cta:hover{background:var(--ink2)!important;}
+
+/* HERO */
+.hero{padding:75px 48px 75px;display:flex;flex-direction:column;}
+.hero-eyebrow{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:24px;display:flex;align-items:center;gap:10px;padding-left:25px;}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--coral);flex-shrink:0;animation:blink 2.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-title{font-family:'Instrument Serif',serif;font-size:clamp(72px,10vw,140px);font-weight:400;line-height:0.95;color:var(--ink);letter-spacing:-0.02em;margin-bottom:40px;}
+.hero-title em{font-style:italic;color:var(--ink2);}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.hero-sub{font-size:clamp(16px,2vw,20px);font-weight:300;color:var(--ink2);max-width:580px;line-height:1.5;}
+.hero-sub strong{color:var(--ink);font-weight:500;}
+
+/* RULE */
+.rule{height:1px;background:rgba(46,46,36,0.12);margin:0 48px;}
+
+/* PULL QUOTE */
+.pull-section{padding:75px 48px;display:grid;grid-template-columns:160px 1fr;gap:80px;align-items:start;}
+.pull-label{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);padding-top:6px;}
+.pull-quote{font-family:'Instrument Serif',serif;font-size:clamp(24px,3.5vw,44px);font-weight:400;font-style:italic;color:var(--ink);line-height:1.2;}
+.pull-quote strong{font-style:normal;color:var(--coral);}
+
+/* BOOKS */
+.books-section{padding:0 48px 75px;}
+.books-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:20px;border-bottom:1px solid rgba(46,46,36,0.12);margin-bottom:0;}
+.books-title{font-family:'Instrument Serif',serif;font-size:clamp(36px,4vw,56px);font-weight:400;color:var(--ink);letter-spacing:-0.02em;}
+.books-meta{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);}
+
+.book-row{display:grid;grid-template-columns:120px 1fr auto;gap:56px;padding:48px 0;border-bottom:1px solid rgba(46,46,36,0.08);align-items:start;}
+.book-num{font-family:'Instrument Serif',serif;font-size:56px;color:rgba(46,46,36,0.07);line-height:1;padding-top:4px;}
+.book-content{}
+.book-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;}
+.book-title{font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,38px);font-weight:400;color:var(--ink);letter-spacing:-0.01em;line-height:1.1;margin-bottom:20px;}
+.book-title em{font-style:italic;color:var(--ink2);}
+.book-body{font-size:15px;font-weight:300;color:var(--ink2);line-height:1.75;max-width:600px;}
+.book-cta{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:12px;padding-top:8px;}
+.book-btn{display:inline-block;background:var(--ink);color:var(--bg);padding:14px 28px;font-size:13px;font-weight:400;letter-spacing:0.04em;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
+.book-btn:hover{background:var(--ink2);transform:translateY(-1px);}
+.book-btn-ghost{display:inline-block;border:1px solid rgba(46,46,36,0.25);color:var(--ink2);padding:13px 28px;font-size:13px;font-weight:300;letter-spacing:0.04em;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
+.book-btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+.book-label{font-size:11px;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3);text-align:right;}
+
+/* SERIES OVERVIEW */
+.series-section{padding:75px 48px;background:var(--ink);}
+.series-label{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:48px;}
+.series-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.series-col{padding:48px 44px;background:rgba(232,229,222,0.04);}
+.series-col-num{font-family:'Instrument Serif',serif;font-size:56px;color:rgba(232,229,222,0.06);line-height:1;margin-bottom:16px;}
+.series-col-title{font-size:17px;font-weight:500;color:var(--bg);margin-bottom:12px;}
+.series-col-body{font-size:14px;font-weight:300;color:var(--ink3);line-height:1.7;}
+
+/* AUTHOR */
+.author-section{padding:75px 48px;}
+.author-inner{display:grid;grid-template-columns:160px 1fr;gap:80px;align-items:start;}
+.author-label{font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);padding-top:6px;}
+.author-block{}
+.author-name{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.5vw,42px);font-weight:400;color:var(--ink);letter-spacing:-0.01em;margin-bottom:20px;}
+.author-bio{font-size:15px;font-weight:300;color:var(--ink2);line-height:1.75;max-width:600px;}
+
+/* CTA */
+.cta-section{padding:75px 48px;background:var(--ink);}
+.cta-inner{display:grid;grid-template-columns:1fr auto;gap:80px;align-items:end;}
+.cta-title{font-family:'Instrument Serif',serif;font-size:clamp(48px,7vw,96px);font-weight:400;line-height:0.95;color:var(--bg);letter-spacing:-0.02em;}
+.cta-title em{font-style:italic;color:rgba(232,229,222,0.35);}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:20px;}
+.cta-sub{font-size:15px;font-weight:300;color:rgba(232,229,222,0.5);text-align:right;max-width:280px;line-height:1.6;}
+.cta-sub strong{color:var(--coral);font-weight:400;}
+.cta-btn{display:inline-block;background:var(--bg);color:var(--ink);padding:18px 40px;font-size:14px;font-weight:400;letter-spacing:0.04em;text-decoration:none;transition:all 0.2s;white-space:nowrap;}
+.cta-btn:hover{background:var(--bg2);transform:translateY(-1px);}
+.cta-credit{font-size:12px;font-weight:300;color:rgba(232,229,222,0.25);}
+
+/* FOOTER */
+footer{padding:28px 48px;border-top:1px solid rgba(46,46,36,0.1);display:flex;justify-content:space-between;align-items:center;}
+footer p{font-size:13px;font-weight:300;color:var(--ink3);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .hero,.rule,.pull-section,.books-section,.series-section,.author-section,.cta-section{padding-left:24px;padding-right:24px;}
+  .rule{margin:0 24px;}
+  .pull-section{grid-template-columns:1fr;gap:16px;}
+  .book-row{grid-template-columns:80px 1fr;gap:24px;}
+  .book-cta{grid-column:2;align-items:flex-start;}
+  .series-grid{grid-template-columns:1fr;}
+  .author-inner{grid-template-columns:1fr;gap:16px;}
+  .cta-inner{grid-template-columns:1fr;gap:48px;}
+  .cta-right{align-items:flex-start;}
+  .cta-sub{text-align:left;}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:24px;}
+}
+@media(max-width:600px){
+  .book-row{grid-template-columns:1fr;gap:8px;}
+  .book-num{font-size:40px;}
+  .book-cta{grid-column:1;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Course Correct</a>
+  <div class="nav-links">
+    <a href="index.html#phases">The programme</a>
+    <a href="index.html#delivery">How it works</a>
+    <a href="index.html#who">Who it's for</a>
+    <a href="cohort.html">First cohort</a>
+    <a href="books.html" class="active">The books</a>
+    <a href="cohort.html#apply" class="nav-cta">Apply now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">The Course Correct Series · Ravi Sibal</p>
+  <h1 class="hero-title">The<br><em>books.</em></h1>
+  <div class="hero-bottom reveal">
+    <p class="hero-sub">A sequence of books for professionals and leaders who sense that the gap between the life they are living and <strong>the life they intended</strong> is wider than it should be — and who are ready to close it.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="pull-section">
+  <p class="pull-label reveal">The premise</p>
+  <p class="pull-quote reveal">Not aspirational self-help. A <strong>clear-eyed examination</strong> of how compounding works in a human life — and what to do about it today.</p>
+</section>
+
+<div class="rule"></div>
+
+<section class="books-section">
+  <div class="books-head reveal">
+    <h2 class="books-title">Two books.</h2>
+    <span class="books-meta">The series</span>
+  </div>
+
+  <div class="book-row reveal">
+    <div class="book-num">01</div>
+    <div class="book-content">
+      <p class="book-eyebrow">Book one</p>
+      <h3 class="book-title">Lead With <em>You</em></h3>
+      <p class="book-body">Begins at the root: purpose. It asks who you are leading from, not just who you are leading toward, and offers a framework for building the kind of self-knowledge that makes every subsequent decision cleaner.</p>
+    </div>
+    <div class="book-cta">
+      <a href="https://www.amazon.co.uk/dp/B0H3PX2LYJ?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk" target="_blank" rel="noopener" class="book-btn">Buy on Amazon →</a>
+      <span class="book-label">Paperback · Amazon UK</span>
+    </div>
+  </div>
+
+  <div class="book-row reveal">
+    <div class="book-num">02</div>
+    <div class="book-content">
+      <p class="book-eyebrow">Book two</p>
+      <h3 class="book-title">The Compass You Were <em>Never Given</em></h3>
+      <p class="book-body">Follows the direction that self-knowledge should produce — and examines, with precision, what happens when it doesn't. It traces the compounding cost of deferred decisions across two representative lives, and asks the reader to look honestly at their own.</p>
+    </div>
+    <div class="book-cta">
+      <a href="https://www.amazon.co.uk/dp/B0H3PX2LYJ?binding=paperback&ref=dbs_dp_rwt_sb_pc_tpbk" target="_blank" rel="noopener" class="book-btn">Buy on Amazon →</a>
+      <span class="book-label">Paperback · Amazon UK</span>
+    </div>
+  </div>
+</section>
+
+<section class="series-section">
+  <p class="series-label reveal">What the series addresses</p>
+  <div class="series-grid">
+    <div class="series-col reveal">
+      <div class="series-col-num">01</div>
+      <div class="series-col-title">Understand your why</div>
+      <div class="series-col-body">Each book addresses a different dimension of the same fundamental question: what does it mean to build a life and a career with genuine direction, and what does it cost when you don't?</div>
+    </div>
+    <div class="series-col reveal">
+      <div class="series-col-num">02</div>
+      <div class="series-col-title">Set your direction. Move.</div>
+      <div class="series-col-body">Taken together, the books form a practical philosophy for a deliberately constructed life — before the slow tax of indecision makes the decision for you.</div>
+    </div>
+  </div>
+</section>
+
+<section class="author-section">
+  <div class="author-inner">
+    <p class="author-label reveal">The author</p>
+    <div class="author-block reveal">
+      <h2 class="author-name">Ravi Sibal</h2>
+      <p class="author-bio">The Course Correct series is written for the person who is serious about their own growth and willing to be honest about where they are. The books examine how compounding works in a human life — in careers, decisions, and the slow accumulation of deferred choices — and what it takes to reverse course before the window closes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-title reveal">Read.<br>Then<br><em>build<br>the<br>plan.</em></h2>
+    <div class="cta-right reveal">
+      <p class="cta-sub">The books give you the framework. The programme gives you the accountability, the community, and a <strong>plan that works.</strong></p>
+      <a href="cohort.html" class="cta-btn">See the first cohort →</a>
+      <p class="cta-credit">Led by Ravi Sibal · Exec MBA · Abu Dhabi, UAE</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Course Correct</p>
+  <p>Architecture for the modern career.</p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('in'); }), {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.padding = window.scrollY > 60 ? '12px 48px' : '20px 48px';
+  });
+</script>
+</body>
+</html>
